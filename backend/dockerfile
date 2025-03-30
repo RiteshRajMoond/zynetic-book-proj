@@ -1,0 +1,17 @@
+# Base Image
+FROM node:slim
+
+# Workdir
+WORKDIR /src
+
+# Copy files
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Expose port
+EXPOSE 9090
+
+# Run the app
+CMD ["npm", "start"]
