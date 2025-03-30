@@ -11,12 +11,26 @@
       "description": "Book Management Operations"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
   "paths": {
     "/api/books": {
       "get": {
         "tags": ["book"],
         "summary": "Get all books",
-        "description": "Retrieve a list of all books. We can also implement searching and filtering through thsis endpoint. Pagination has been implemented too",
+        "description": "Retrieve a list of all books. Searching, filtering, and pagination are implemented.",
         "responses": {
           "200": {
             "description": "List of books retrieved successfully"
@@ -29,8 +43,8 @@
       "post": {
         "tags": ["book"],
         "summary": "Create a new book",
-        "description": "Add a bew book",
-        "security": [{ "bearerAuth": [] }],
+        "description": "Add a new book",
+        "security": [{ "BearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -47,7 +61,7 @@
                     "type": "string",
                     "example": "George RR Martin"
                   },
-                  "catefory": {
+                  "category": {
                     "type": "string",
                     "example": "fiction"
                   },
@@ -91,7 +105,7 @@
           {
             "name": "id",
             "in": "path",
-            "requiured": true,
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -113,8 +127,8 @@
       "put": {
         "tags": ["book"],
         "summary": "Update a book",
-        "description": "modify details of a book by id",
-        "security": [{ "bearerAuth": [] }],
+        "description": "Modify details of a book by ID",
+        "security": [{ "BearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
@@ -182,7 +196,7 @@
         "tags": ["book"],
         "summary": "Delete a book",
         "description": "Remove a book by its ID",
-        "security": [{ "bearerAuth": [] }],
+        "security": [{ "BearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
