@@ -8,10 +8,14 @@ const authRoutes = require("./routes/auth-routes");
 const bookRoutes = require("./routes/book-routes");
 const errorHandler = require("./middlewares/error-handler");
 
+const setupSwagger = require("./config/swagger");
+
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+setupSwagger(app);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);

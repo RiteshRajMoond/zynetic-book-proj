@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Book Store API",
+    "version": "1.0.0",
+    "description": "Book API Routes"
+  },
+  "servers": [{ "url": "http://localhost:9090" }],
+  "tags": [
+    {
+      "name": "book",
+      "description": "Book Management Operations"
+    }
+  ],
+  "paths": {
+    "/api/books": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Get all books",
+        "description": "Retrieve a list of all books",
+        "responses": {
+          "200": {
+            "description": "List of books retrieved successfully"
+          },
+          "500": {
+            "description": "Internal Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["book"],
+        "summary": "Create a new book",
+        "description": "Add a bew book",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "author", "price", "rating", "category"],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "A Song of Ice and Fire"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "George RR Martin"
+                  },
+                  "catefory": {
+                    "type": "string",
+                    "example": "fiction"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 5
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book created successfully"
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
