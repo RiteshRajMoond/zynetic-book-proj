@@ -12,7 +12,7 @@ const bookSwagger = JSON.parse(
 const swaggerSpecs = {
   openapi: "3.0.0",
   info: authSwagger.info,
-  servers: authSwagger.servers,
+  servers: [{ url: process.env.BACKEND_URI }],
   paths: {
     ...authSwagger.paths,
     ...bookSwagger.paths,
