@@ -16,7 +16,7 @@
       "get": {
         "tags": ["book"],
         "summary": "Get all books",
-        "description": "Retrieve a list of all books",
+        "description": "Retrieve a list of all books. We can also implement searching and filtering through thsis endpoint. Pagination has been implemented too",
         "responses": {
           "200": {
             "description": "List of books retrieved successfully"
@@ -75,6 +75,137 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/books/{id}": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Get a book by ID",
+        "description": "Retrieve a specific book by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "requiured": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book retrieved"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["book"],
+        "summary": "Update a book",
+        "description": "modify details of a book by id",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "updated title"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "updated author"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "updated category"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 10.99
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 9.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated successfully"
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["book"],
+        "summary": "Delete a book",
+        "description": "Remove a book by its ID",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Book not found"
           },
           "500": {
             "description": "Internal server error"
